@@ -1,46 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+﻿<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Font Roboto -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
-
-    <!-- Nosso CSS -->
-    <link rel="stylesheet" href="/assets/css/global.css">
-    <link rel="stylesheet" href="/assets/css/pokedex.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokédex</title>
+  <link rel="stylesheet" href="normalize.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <section class="content">
-        <h1>Pokedex</h1>
 
-        <ol id="pokemonList" class="pokemons">
-            <!-- ..... Pokemons here ..... -->
-        </ol>
+  <header class="header">
+    <div class="header__content">
+      <h1 class="header__title">
+        <span class="header__pokeball" aria-hidden="true"></span>
+        Pokédex
+      </h1>
 
-        <div class="pagination">
-            <button id="loadMoreButton" type="button">
-                Load More
-            </button>
-        </div>
-    </section>
+      <form class="search" id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          class="search__input"
+          placeholder="Buscar Pokémon pelo nome ou número..."
+          autocomplete="off"
+        />
+        <button type="submit" class="search__button" aria-label="Buscar">🔍</button>
+        <button type="button" class="search__clear" id="clear-button" hidden>Limpar busca</button>
+      </form>
 
-    <!-- Nosso JS -->
-    <script src="/assets/js/pokemon-model.js"></script>
-    <script src="/assets/js/poke-api.js"></script>
-    <script src="/assets/js/main.js"></script>
+      <div class="filters" id="type-filters">
+        <button class="filter-chip filter-chip--active" data-type="all">Todos</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <p class="status" id="status-message" hidden></p>
+
+    <ul class="pokemon-grid" id="pokemon-grid" aria-live="polite"></ul>
+
+    <div class="loader" id="loader">
+      <div class="loader__pokeball" aria-hidden="true"></div>
+      <p>Carregando Pokémon...</p>
+    </div>
+
+    <button class="load-more" id="load-more-button">Carregar mais</button>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close" id="modal-close" aria-label="Fechar">✕</button>
+      <div class="modal__content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>
+      Feito por Pedro Aruanã — Dados fornecidos pela
+      <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokéAPI</a>
+    </p>
+  </footer>
+
+  <script src="pokeApi.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
